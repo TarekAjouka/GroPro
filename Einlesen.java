@@ -55,7 +55,7 @@ public class Einlesen {
         // Verbindungen vervollständigen (Zielpunkte ersetzen, Verbindungsliste füllen)
         for (Einfallpunkt ep : einfallpunkte) {
             Punkt ziel = punkte.get(ep.getZiel().getName()); // Zielname kommt aus Dummy
-            ep.setZiel(ziel);
+           // ep.setZiel(ziel);
             verbindungen.add(new Verbindung(ep, ziel));
         }
 
