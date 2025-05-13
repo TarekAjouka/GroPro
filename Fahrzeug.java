@@ -1,4 +1,5 @@
 import java.util.Map;
+import java.util.Set;
 import java.util.Random;
 
 public class Fahrzeug {
@@ -7,16 +8,25 @@ public class Fahrzeug {
     private Verbindung actuell;
     private double speed;
 
-    public Fahrzeug(Einfallpunkt ep, Map<String, Verbindung> verbindungen) {
+    public Fahrzeug(Einfallpunkt ep, Set<Verbindung> verbindungen) {
         this.x = ep.getX();
         this.y = ep.getY();
         
-        // Suche die passende Verbindung aus der Map
-        String verbindungKey = ep.getName() + "-" + ep.getZiel().getName();  // oder wie auch immer Ihr Key-Format ist
-        this.actuell = verbindungen.get(verbindungKey);
+        // Temporäre Verbindung zum Vergleich erstellen
+        Verbindung tempVerbindung = new Verbindung(ep, ep.getZiel());
+        
+        // Finde die passende Verbindung im Set
+        this.actuell = null;
+        for (Verbindung v : verbindungen) {
+            if (v.equals(tempVerbindung)) {
+                this.actuell = v;
+                break;
+            }
+        }
         
         if (this.actuell == null) {
-            throw new IllegalArgumentException("Keine Verbindung gefunden von " + ep.getName() + " nach " + ep.getZiel().getName());
+            throw new IllegalArgumentException("Keine Verbindung gefunden von " + 
+                ep.getName() + " nach " + ep.getZiel().getName());
         }
 
         // Zähle das Fahrzeug sofort auf seiner ersten Verbindung
@@ -26,18 +36,10 @@ public class Fahrzeug {
         this.speed = (random.nextGaussian() * 10.0 + 45.0) * 1000 / 3600;
     }
 
-    public String getSpeed() {
-        return speed + " m/s";
-    }
-
-    public boolean bewegen(int sec, Map<String, Verbindung> verbindungen) {
-        // Fahrzeug ist bereits gezählt worden, also hier KEIN actuell.fahrzeugZaehlen() mehr nötig
-        
-        // Berechne die verbleibende Strecke zum Zielpunkt
+    public boolean bewegen(int sec, Set<Verbindung> verbindungen) {
         double dx = actuell.getNach().getX() - x;
         double dy = actuell.getNach().getY() - y;
         
-        // Rest des Codes wie vorher...
         double verbleibendeStrecke = Math.sqrt(dx * dx + dy * dy);
         double bewegungsdistanz = speed * sec /100;
         
@@ -61,14 +63,22 @@ public class Fahrzeug {
                 for (Map.Entry<Punkt, Double> entry : wahrscheinlichkeiten.entrySet()) {
                     summe += entry.getValue();
                     if (zufallsZahl <= summe) {
-                        String verbindungKey = kreuzung.getName() + "-" + entry.getKey().getName();
-                        actuell = verbindungen.get(verbindungKey);
+                        // Temporäre Verbindung zum Vergleich erstellen
+                        Verbindung tempVerbindung = new Verbindung(kreuzung, entry.getKey());
+                        
+                        // Finde die neue Verbindung
+                        for (Verbindung v : verbindungen) {
+                            if (v.equals(tempVerbindung)) {
+                                actuell = v;
+                                actuell.fahrzeugZaehlen();
+                                break;
+                            }
+                        }
+                        
                         if (actuell == null) {
                             throw new IllegalStateException("Keine Verbindung gefunden von " + 
                                 kreuzung.getName() + " nach " + entry.getKey().getName());
                         }
-                        // Zähle das Fahrzeug auf der neuen Verbindung
-                        actuell.fahrzeugZaehlen();
                         break;
                     }
                 }
@@ -84,5 +94,9 @@ public class Fahrzeug {
             }
         }
         return false;
+    }
+
+    public String getSpeed() {
+        return speed + " m/s";
     }
 }
