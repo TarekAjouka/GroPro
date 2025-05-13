@@ -2,6 +2,8 @@ import java.io.*;
 import java.util.*;
 
 public class Einlesen {
+    private int endeZeit;
+    private int zeitSchritt;
     private final Map<String, Punkt> punkte = new HashMap<>();
     private final List<Einfallpunkt> einfallpunkte = new ArrayList<>();
     private final List<Kreuzung> kreuzungen = new ArrayList<>();
@@ -29,7 +31,16 @@ public class Einlesen {
                     punkte.put(name, ep);
                     einfallpunkte.add(ep);
                 }
-            } else if (line.equalsIgnoreCase("Kreuzungen:")) {
+
+            }else if(line.equalsIgnoreCase("Zeitraum:")){
+                while ((line = reader.readLine()) != null && !line.trim().isEmpty()) {
+                    String[] parts = line.trim().split("\\s+");
+                    endeZeit = Integer.parseInt(parts[0]);
+                    zeitSchritt = Integer.parseInt(parts[1]);
+
+                }
+            }
+            else if (line.equalsIgnoreCase("Kreuzungen:")) {
                 while ((line = reader.readLine()) != null && !line.trim().isEmpty()) {
                     String[] parts = line.trim().split("\\s+");
                     String name = parts[0];
@@ -91,6 +102,13 @@ public class Einlesen {
             }
         }
 
+    }
+
+    public int getEndeZeit() {
+        return endeZeit;
+    }
+    public int getZeitSchritt() {
+        return zeitSchritt;
     }
 
     public Map<String, Punkt> getPunkte() {

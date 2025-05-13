@@ -12,6 +12,11 @@ public class Main {
         System.out.println(first.getVerbindungen().size());
         System.out.println(first.getEinfallpunkte());
         System.out.println(first.getKreuzungen());
+        System.out.println(first.getPunkte());
+        System.out.println(first.getEndeZeit());
+        System.out.println(first.getZeitSchritt());
+        //Fahrzeug x = new Fahrzeug(1, 1);
+        //System.out.println(x.getSpeed());
 
     }
 }
