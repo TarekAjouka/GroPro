@@ -8,6 +8,7 @@ public class Verbindung {
     private int aktuelleAnzahl;  // Aktuelle Anzahl im Zeitschritt
 
     public Verbindung(Punkt von, Punkt nach) {
+
         if (von == null || nach == null) {
             throw new IllegalArgumentException("Von und Nach Punkte dürfen nicht null sein");
         }

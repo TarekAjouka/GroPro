@@ -26,12 +26,14 @@ public class Einlesen {
                     String zielName = parts[3];
                     int takt = Integer.parseInt(parts[4]);
 
-                    // Zielpunkt ist Platzhalter, wird später aufgelöst
-                    Einfallpunkt ep = new Einfallpunkt(name, x, y, null, takt);
+                    // Erstelle DummyPunkt für das Ziel
+                    Punkt dummyZiel = new DummyPunkt(zielName);
+
+                    // Erstelle Einfallpunkt mit dem DummyPunkt als temporäres Ziel
+                    Einfallpunkt ep = new Einfallpunkt(name, x, y, dummyZiel, takt);
                     punkte.put(name, ep);
                     einfallpunkte.add(ep);
                 }
-
             }else if(line.equalsIgnoreCase("Zeitraum:")){
                 while ((line = reader.readLine()) != null && !line.trim().isEmpty()) {
                     String[] parts = line.trim().split("\\s+");
