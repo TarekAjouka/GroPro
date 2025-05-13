@@ -5,7 +5,7 @@ public class Kreuzung extends Punkt {
     private String name;
     private Map<Punkt, Integer> verteilungsAnteile; // Zielpunkt → Verhältnisanteil
 
-    public Kreuzung(String name, int x, int y) {
+    public Kreuzung(String name, double x, double y) {
         super(x, y);
         this.name = name;
         this.verteilungsAnteile = new HashMap<>();

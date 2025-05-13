@@ -2,15 +2,25 @@ import java.util.Map;
 import java.util.Random;
 
 public class Fahrzeug {
-    private int x;
-    private int y;
+    private double x;
+    private double y;
     private Verbindung actuell;
     private double speed;
 
-    public Fahrzeug(Einfallpunkt ep) {
+    public Fahrzeug(Einfallpunkt ep, Map<String, Verbindung> verbindungen) {
         this.x = ep.getX();
         this.y = ep.getY();
-        this.actuell = new Verbindung(ep, ep.getZiel());
+        
+        // Suche die passende Verbindung aus der Map
+        String verbindungKey = ep.getName() + "-" + ep.getZiel().getName();  // oder wie auch immer Ihr Key-Format ist
+        this.actuell = verbindungen.get(verbindungKey);
+        
+        if (this.actuell == null) {
+            throw new IllegalArgumentException("Keine Verbindung gefunden von " + ep.getName() + " nach " + ep.getZiel().getName());
+        }
+
+        // Zähle das Fahrzeug sofort auf seiner ersten Verbindung
+        this.actuell.fahrzeugZaehlen();
 
         Random random = new Random();
         this.speed = (random.nextGaussian() * 10.0 + 45.0) * 1000 / 3600;
@@ -20,54 +30,49 @@ public class Fahrzeug {
         return speed + " m/s";
     }
 
-    public boolean bewegen(int sec) {
+    public boolean bewegen(int sec, Map<String, Verbindung> verbindungen) {
+        // Fahrzeug ist bereits gezählt worden, also hier KEIN actuell.fahrzeugZaehlen() mehr nötig
+        
         // Berechne die verbleibende Strecke zum Zielpunkt
         double dx = actuell.getNach().getX() - x;
         double dy = actuell.getNach().getY() - y;
         
-        // Berechne die verbleibende Länge zum Ziel
+        // Rest des Codes wie vorher...
         double verbleibendeStrecke = Math.sqrt(dx * dx + dy * dy);
-        
-        // Bewegungsdistanz ist die Geschwindigkeit mal Sekunden
-        double bewegungsdistanz = speed * sec;
+        double bewegungsdistanz = speed * sec /100;
         
         if (bewegungsdistanz < verbleibendeStrecke) {
-            // Fall 1: Auto fährt normal weiter auf der aktuellen Verbindung
             x += (dx / verbleibendeStrecke) * bewegungsdistanz;
             y += (dy / verbleibendeStrecke) * bewegungsdistanz;
-            return false;
         } else {
-            // Fahrzeug erreicht das Ziel
             x = actuell.getNach().getX();
             y = actuell.getNach().getY();
             
-            // Prüfe ob das Ziel ein Einfallpunkt ist
             if (actuell.getNach().getTyp().equals("Einfallpunkt")) {
-                return true; // Fahrzeug soll gelöscht werden
+                return true;
             }
             
-            // Wenn es eine Kreuzung ist
             if (actuell.getNach().getTyp().equals("Kreuzung")) {
                 Kreuzung kreuzung = (Kreuzung) actuell.getNach();
-                
-                // Hole Wahrscheinlichkeiten ohne den Herkunftspunkt
                 Map<Punkt, Double> wahrscheinlichkeiten = kreuzung.getWahrscheinlichkeitenOhne(actuell.getVon());
-                
-                // Zufällige Zahl zwischen 0 und 100
                 double zufallsZahl = new Random().nextDouble() * 100;
                 double summe = 0.0;
                 
-                // Wähle Zielpunkt basierend auf Wahrscheinlichkeiten
                 for (Map.Entry<Punkt, Double> entry : wahrscheinlichkeiten.entrySet()) {
                     summe += entry.getValue();
                     if (zufallsZahl <= summe) {
-                        // Neue Verbindung erstellen: von der Kreuzung zum gewählten Ziel
-                        actuell = new Verbindung(kreuzung, entry.getKey());
+                        String verbindungKey = kreuzung.getName() + "-" + entry.getKey().getName();
+                        actuell = verbindungen.get(verbindungKey);
+                        if (actuell == null) {
+                            throw new IllegalStateException("Keine Verbindung gefunden von " + 
+                                kreuzung.getName() + " nach " + entry.getKey().getName());
+                        }
+                        // Zähle das Fahrzeug auf der neuen Verbindung
+                        actuell.fahrzeugZaehlen();
                         break;
                     }
                 }
                 
-                // Restliche Bewegung auf der neuen Verbindung
                 double restStrecke = bewegungsdistanz - verbleibendeStrecke;
                 if (restStrecke > 0) {
                     dx = actuell.getNach().getX() - x;
@@ -77,7 +82,7 @@ public class Fahrzeug {
                     y += (dy / neueStrecke) * restStrecke;
                 }
             }
-            return false;
         }
+        return false;
     }
 }

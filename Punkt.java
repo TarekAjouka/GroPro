@@ -1,19 +1,19 @@
 import java.util.Objects;
 
 public abstract class Punkt {
-    protected int x;
-    protected int y;
+    protected double x;
+    protected double y;
 
-    public Punkt(int x, int y) {
+    public Punkt(double x, double y) {
         this.x = x;
         this.y = y;
     }
 
-    public int getX() {
+    public double getX() {
         return x;
     }
 
-    public int getY() {
+    public double getY() {
         return y;
     }
 

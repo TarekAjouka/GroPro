@@ -8,6 +8,7 @@ public class Main {
             e.printStackTrace();
         }
 
+
         System.out.println(first.getVerbindungen());
         System.out.println(first.getVerbindungen().size());
         System.out.println(first.getEinfallpunkte());

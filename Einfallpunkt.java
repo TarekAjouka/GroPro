@@ -3,7 +3,7 @@ public class Einfallpunkt extends Punkt {
     private Punkt ziel; // Zielpunkt (z.b eine Kreuzung)
     private int takt;   // Takt in dem Fahrzeuge erzeugt werden
 
-    public Einfallpunkt(String name, int x, int y, Punkt ziel, int takt) {
+    public Einfallpunkt(String name, double x, double y, Punkt ziel, int takt) {
         super(x, y);
         this.name = name;
         this.ziel = ziel;
