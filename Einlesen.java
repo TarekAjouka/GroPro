@@ -5,7 +5,7 @@ public class Einlesen {
     private final Map<String, Punkt> punkte = new HashMap<>();
     private final List<Einfallpunkt> einfallpunkte = new ArrayList<>();
     private final List<Kreuzung> kreuzungen = new ArrayList<>();
-    private final List<Verbindung> verbindungen = new ArrayList<>();
+    private final Set<Verbindung> verbindungen = new HashSet<>();
 
     public void ladeAusDatei(String dateipfad) throws IOException {
         BufferedReader reader = new BufferedReader(new FileReader(dateipfad));
@@ -54,9 +54,9 @@ public class Einlesen {
 
         // Verbindungen vervollständigen (Zielpunkte ersetzen, Verbindungsliste füllen)
         for (Einfallpunkt ep : einfallpunkte) {
-            Punkt ziel = punkte.get(ep.getZiel().getName()); // Zielname kommt aus Dummy
-           // ep.setZiel(ziel);
-            verbindungen.add(new Verbindung(ep, ziel));
+            Punkt ziel = punkte.get(ep.getZielName()); // Zielname kommt aus Dummy
+            ep.setZiel(ziel);
+
         }
 
         for (Kreuzung k : kreuzungen) {
@@ -67,13 +67,30 @@ public class Einlesen {
                 Punkt dummy = entry.getKey();
                 Punkt echtesZiel = punkte.get(dummy.getName());
                 ersetzt.put(echtesZiel, entry.getValue());
-                verbindungen.add(new Verbindung(k, echtesZiel));
+
             }
 
             // Ersetzte Map setzen
             alte.clear();
             alte.putAll(ersetzt);
         }
+
+        for (Kreuzung k : kreuzungen) {
+            for (Map.Entry<Punkt, Integer> entry : k.getVerteilungsAnteile().entrySet()) {
+                Punkt ziel = entry.getKey();
+                int anteil = entry.getValue();
+
+                // 1. Originalrichtung: von k nach Ziel
+                Verbindung v1 = new Verbindung(k, ziel);
+
+
+                // 2. Umgekehrte Richtung: von ziel nach k (aber ohne Anteil)
+                Verbindung v2 = new Verbindung(ziel, k);
+                verbindungen.add(v1);
+                verbindungen.add(v2);
+            }
+        }
+
     }
 
     public Map<String, Punkt> getPunkte() {
@@ -88,7 +105,7 @@ public class Einlesen {
         return kreuzungen;
     }
 
-    public List<Verbindung> getVerbindungen() {
+    public Set<Verbindung> getVerbindungen() {
         return verbindungen;
     }
 

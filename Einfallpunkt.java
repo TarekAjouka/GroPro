@@ -21,6 +21,13 @@ public class Einfallpunkt extends Punkt {
     public int getTakt() {
         return takt;
     }
+    public String getZielName() {
+        return ziel == null ? null : ziel.getName();
+    }
+
+    public void setZiel(Punkt ziel) {
+        this.ziel = ziel;
+    }
 
     @Override
     public String getTyp() {
