@@ -1,23 +1,12 @@
 public class Main {
 
     public static void main(String[] args) {
-        Einlesen first = new Einlesen();
-        try {
-            first.ladeAusDatei("Eingabe.txt");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
 
-
-        System.out.println(first.getVerbindungen());
-        System.out.println(first.getVerbindungen().size());
-        System.out.println(first.getEinfallpunkte());
-        System.out.println(first.getKreuzungen());
-        System.out.println(first.getPunkte());
-        System.out.println(first.getEndeZeit());
-        System.out.println(first.getZeitSchritt());
-        //Fahrzeug x = new Fahrzeug(1, 1);
-        //System.out.println(x.getSpeed());
+        Simulation.start("Vorlage/IHK_01/Eingabe.txt","Vorlage/IHK_01/");
+        Simulation.start("Vorlage/IHK_02/Eingabe.txt","Vorlage/IHK_02/");
+        Simulation.start("Vorlage/IHK_03/Eingabe.txt","Vorlage/IHK_03/");
+        Simulation.start("Vorlage/IHK_04/Eingabe.txt","Vorlage/IHK_04/");
+        Simulation.start("Vorlage/IHK_05/Eingabe.txt","Vorlage/IHK_05/");
 
     }
 }

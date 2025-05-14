@@ -21,8 +21,8 @@ public class Einlesen {
                 while ((line = reader.readLine()) != null && !line.trim().isEmpty()) {
                     String[] parts = line.trim().split("\\s+");
                     String name = parts[0];
-                    int x = Integer.parseInt(parts[1]);
-                    int y = Integer.parseInt(parts[2]);
+                    double x = Double.parseDouble(parts[1]);
+                    double y = Double.parseDouble(parts[2]);
                     String zielName = parts[3];
                     int takt = Integer.parseInt(parts[4]);
 
@@ -46,8 +46,8 @@ public class Einlesen {
                 while ((line = reader.readLine()) != null && !line.trim().isEmpty()) {
                     String[] parts = line.trim().split("\\s+");
                     String name = parts[0];
-                    int x = Integer.parseInt(parts[1]);
-                    int y = Integer.parseInt(parts[2]);
+                    double x = Double.parseDouble(parts[1]);
+                    double y = Double.parseDouble(parts[2]);
 
                     Kreuzung kreuzung = new Kreuzung(name, x, y);
                     punkte.put(name, kreuzung);
