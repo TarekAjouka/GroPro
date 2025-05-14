@@ -35,16 +35,12 @@ public class Verbindung {
         gesamt++;
     }
 
-    public int getAktuelleAnzahl() {
-        return aktuelleAnzahl;
-    }
-
     public double getGesamt() {
-        return gesamt/100;
+        return gesamt/this.getLaenge();
     }
 
     public double getMax() {
-        return max/100;
+        return max/this.getLaenge();
     }
 
     public Punkt getVon() {
@@ -65,8 +61,8 @@ public class Verbindung {
     public String toString() {
         return "Verbindung von " + von.getName() + " nach " + nach.getName()
                 + " (Länge: " + String.format("%.2f", getLaenge()) 
-                + ", Gesamt: " + gesamt 
-                + ", Max: " + max + ")";
+                + ", Gesamt: " + this.getGesamt()
+                + ", Max: " + this.getMax()  + ")";
     }
 
     @Override

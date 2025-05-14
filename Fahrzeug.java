@@ -36,7 +36,19 @@ public class Fahrzeug {
         this.speed = (random.nextGaussian() * 10.0 + 45.0) * 1000 / 3600;
     }
 
-    public boolean bewegen(int sec, Set<Verbindung> verbindungen) {
+    public Verbindung getActuell() {
+        return actuell;
+    }
+
+    public double getY() {
+        return y;
+    }
+
+    public double getX() {
+        return x;
+    }
+
+    public boolean bewegen(int sec, Set<Verbindung> verbindungen,boolean zeitSchritt) {
         double dx = actuell.getNach().getX() - x;
         double dy = actuell.getNach().getY() - y;
         
@@ -44,6 +56,9 @@ public class Fahrzeug {
         double bewegungsdistanz = speed * sec /100;
         
         if (bewegungsdistanz < verbleibendeStrecke) {
+            if(zeitSchritt){
+                actuell.fahrzeugZaehlen();
+            }
             x += (dx / verbleibendeStrecke) * bewegungsdistanz;
             y += (dy / verbleibendeStrecke) * bewegungsdistanz;
         } else {
