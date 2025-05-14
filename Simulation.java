@@ -23,6 +23,7 @@ public class Simulation {
         List<Einfallpunkt> einfallpunkte = first.getEinfallpunkte();
 
         // Liste für aktive Fahrzeuge
+        // ID wird erstmal auf 0 gesetzt und erhöht sich jeweils um 1 bei jedem neuen Fahrzeug
         int nextId =0;
         Map<Integer, Fahrzeug> aktiveFahrzeuge = new HashMap<>();
 

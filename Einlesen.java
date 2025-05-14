@@ -112,19 +112,9 @@ public class Einlesen {
     public int getZeitSchritt() {
         return zeitSchritt;
     }
-
-    public Map<String, Punkt> getPunkte() {
-        return punkte;
-    }
-
     public List<Einfallpunkt> getEinfallpunkte() {
         return einfallpunkte;
     }
-
-    public List<Kreuzung> getKreuzungen() {
-        return kreuzungen;
-    }
-
     public Set<Verbindung> getVerbindungen() {
         return verbindungen;
     }
