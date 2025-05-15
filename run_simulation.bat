@@ -8,18 +8,10 @@ echo.
 set /p wahl="Bitte waehlen Sie (1 oder 2): "
 
 if "%wahl%"=="1" (
-    jshell -q <<EOF
-    var p = new Programm();
-    p.starteAlleBeispiele();
-    /exit
-    EOF
+    jshell -q -s "var p = new Programm(); p.starteAlleBeispiele(); /exit"
 ) else if "%wahl%"=="2" (
     set /p pfad="Bitte geben Sie den Pfad zur Eingabedatei ein: "
-    jshell -q <<EOF
-    var p = new Programm();
-    p.start("%pfad%");
-    /exit
-    EOF
+    jshell -q -s "var p = new Programm(); p.start('%pfad%'); /exit"
 ) else (
     echo Ungueltige Eingabe!
 )
