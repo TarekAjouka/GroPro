@@ -12,6 +12,7 @@
       <sourceFolder url="file://$MODULE_DIR$/Vorlage/IHK_03" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Vorlage/IHK_04" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Vorlage/IHK_05" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Abgabe" isTestSource="false" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

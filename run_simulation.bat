@@ -42,7 +42,6 @@ goto menu
 :eigene_datei
 echo.
 set /p eingabepfad="Geben Sie den Pfad zur Eingabedatei ein (z.B. mein/pfad/Eingabe.txt): "
-set /p ausgabepfad="Geben Sie den Ausgabepfad ein (z.B. mein/pfad/): "
 
 if not exist "%eingabepfad%" (
     echo Fehler: Eingabedatei nicht gefunden!
@@ -51,7 +50,7 @@ if not exist "%eingabepfad%" (
 
 echo.
 echo Starte Simulation...
-java -cp . Simulation "%eingabepfad%" "%ausgabepfad%"
+java -cp . Main "%eingabepfad%"
 echo.
 echo Simulation wurde ausgefuehrt.
 goto menu
