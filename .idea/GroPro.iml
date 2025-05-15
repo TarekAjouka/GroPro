@@ -4,6 +4,18 @@
     <exclude-output />
     <content url="file://$MODULE_DIR$">
       <sourceFolder url="file://$MODULE_DIR$" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Abgabe" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Abgabe/Vorlage" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Abgabe/Vorlage/IHK_01" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Abgabe/Vorlage/IHK_01/plots" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Abgabe/Vorlage/IHK_02" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Abgabe/Vorlage/IHK_02/plots" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Abgabe/Vorlage/IHK_03" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Abgabe/Vorlage/IHK_03/plots" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Abgabe/Vorlage/IHK_04" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Abgabe/Vorlage/IHK_04/plots" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Abgabe/Vorlage/IHK_05" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Abgabe/Vorlage/IHK_05/plots" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Docu" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Docu/Tex" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Vorlage" isTestSource="false" />
