@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<projektDokumentation>
+    <projekt>
+        <name>Verkehrssimulation</name>
+        <version>1.0</version>
+        <beschreibung>
+            Ein Java-Programm zur Simulation von Verkehrsflüssen mit Kreuzungen und Einfallspunkten.
+        </beschreibung>
+    </projekt>
+
+    <klassen>
+        <klasse>
+            <name>Main</name>
+            <beschreibung>Hauptklasse zum Starten der Simulation</beschreibung>
+            <methoden>
+                <methode>
+                    <name>main</name>
+                    <parameter>String[] args</parameter>
+                    <funktion>Startet die Simulation entweder mit Standardbeispielen oder einer benutzerdefinierten Eingabedatei</funktion>
+                </methode>
+            </methoden>
+        </klasse>
+
+        <klasse>
+            <name>Simulation</name>
+            <beschreibung>Steuert den Simulationsablauf</beschreibung>
+            <methoden>
+                <methode>
+                    <name>start</name>
+                    <parameter>
+                        <param>String pfad - Pfad zur Eingabedatei</param>
+                        <param>String outPut - Ausgabeverzeichnis</param>
+                    </parameter>
+                    <ausgabeDateien>
+                        <datei>Fahrzeuge.txt - Enthält Positionsdaten der Fahrzeuge</datei>
+                        <datei>Plan.txt - Enthält die Straßenverbindungen</datei>
+                        <datei>Statistik.txt - Enthält statistische Auswertungen</datei>
+                    </ausgabeDateien>
+                </methode>
+            </methoden>
+        </klasse>
+
+        <klasse>
+            <name>Punkt</name>
+            <beschreibung>Abstrakte Basisklasse für Orte im Verkehrsnetz</beschreibung>
+            <attribute>
+                <attribut>double x - X-Koordinate</attribut>
+                <attribut>double y - Y-Koordinate</attribut>
+            </attribute>
+            <abstraktMethoden>
+                <methode>String getTyp()</methode>
+                <methode>String getName()</methode>
+            </abstraktMethoden>
+        </klasse>
+
+        <klasse>
+            <name>Kreuzung</name>
+            <erbt>Punkt</erbt>
+            <beschreibung>Repräsentiert eine Kreuzung im Verkehrsnetz</beschreibung>
+            <attribute>
+                <attribut>String name - Name der Kreuzung</attribut>
+                <attribut>Map&lt;Punkt, Integer&gt; verteilungsAnteile - Verteilung der Fahrzeuge</attribut>
+            </attribute>
+        </klasse>
+
+        <klasse>
+            <name>Einfallpunkt</name>
+            <erbt>Punkt</erbt>
+            <beschreibung>Repräsentiert einen Punkt, an dem neue Fahrzeuge ins System kommen</beschreibung>
+            <attribute>
+                <attribut>String name - Name des Einfallpunkts</attribut>
+                <attribut>Punkt ziel - Zielpunkt für neue Fahrzeuge</attribut>
+                <attribut>int takt - Zeitintervall für neue Fahrzeuge</attribut>
+            </attribute>
+        </klasse>
+
+        <klasse>
+            <name>Verbindung</name>
+            <beschreibung>Repräsentiert eine Straßenverbindung zwischen zwei Punkten</beschreibung>
+            <attribute>
+                <attribut>Punkt von - Startpunkt</attribut>
+                <attribut>Punkt nach - Endpunkt</attribut>
+                <attribut>double gesamt - Gesamtzahl der Fahrzeuge</attribut>
+                <attribut>double max - Maximale Anzahl der Fahrzeuge</attribut>
+                <attribut>int aktuelleAnzahl - Aktuelle Anzahl im Zeitschritt</attribut>
+            </attribute>
+        </klasse>
+
+        <klasse>
+            <name>Fahrzeug</name>
+            <beschreibung>Repräsentiert ein einzelnes Fahrzeug in der Simulation</beschreibung>
+            <attribute>
+                <attribut>double x - X-Position</attribut>
+                <attribut>double y - Y-Position</attribut>
+                <attribut>Verbindung actuell - Aktuelle Verbindung</attribut>
+                <attribut>double speed - Geschwindigkeit in m/s</attribut>
+            </attribute>
+        </klasse>
+
+        <klasse>
+            <name>Einlesen</name>
+            <beschreibung>Liest die Simulationskonfiguration aus einer Textdatei</beschreibung>
+            <eingabeFormat>
+                <sektion>
+                    <name>Einfallspunkte:</name>
+                    <format>Name X-Koordinate Y-Koordinate Zielname Takt</format>
+                </sektion>
+                <sektion>
+                    <name>Zeitraum:</name>
+                    <format>Endzeit Zeitschritt</format>
+                </sektion>
+                <sektion>
+                    <name>Kreuzungen:</name>
+                    <format>Name X-Koordinate Y-Koordinate [Zielname Anteil]*</format>
+                </sektion>
+            </eingabeFormat>
+        </klasse>
+    </klassen>
+
+    <ausgabeDateien>
+        <datei>
+            <name>Fahrzeuge.txt</name>
+            <format>
+                <zeile>*** t = [Zeitschritt]</zeile>
+                <zeile>[X-Position] [Y-Position] [Ziel-X] [Ziel-Y] [Fahrzeug-ID]</zeile>
+            </format>
+        </datei>
+        <datei>
+            <name>Plan.txt</name>
+            <format>
+                <zeile>[Start-X] [Start-Y] [End-X] [End-Y]</zeile>
+            </format>
+        </datei>
+        <datei>
+            <name>Statistik.txt</name>
+            <format>
+                <sektion>Gesamtanzahl Fahrzeuge pro 100 m:</sektion>
+                <sektion>Maximale Anzahl Fahrzeuge pro 100m:</sektion>
+            </format>
+        </datei>
+    </ausgabeDateien>
+</projektDokumentation>

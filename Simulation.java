@@ -30,7 +30,7 @@ public class Simulation {
 
         //Fahzeuge.txt erstellen
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(outPut+"Fahrzeuge.txt"))) {
-            for (int i = 1; i <= zeitEnde; i++) {
+            for (int i = 0; i <= zeitEnde; i++) {
                 boolean ifZeitschritt = false;
                 if (i % zeitschritt == 0) {
                     ifZeitschritt = true;
@@ -48,7 +48,7 @@ public class Simulation {
 
                 // Neue Fahrzeuge erstellen
                 for (Einfallpunkt ep : einfallpunkte) {
-                    if (i % ep.getTakt() == 0) {
+                    if (i!=0&&i % ep.getTakt() == 0) {
                         Fahrzeug neuesFahrzeug = new Fahrzeug(ep, verbindungen);
                         aktiveFahrzeuge.put(nextId++, neuesFahrzeug);
                     }

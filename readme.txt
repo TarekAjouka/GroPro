@@ -1,4 +1,3 @@
-# GroPro
 BENUTZERHANDBUCH: VERKEHRSSIMULATION
 ====================================
 
@@ -27,9 +26,9 @@ Waehlen Sie eine Option:
 3.2 EIGENE SIMULATION (Option 2)
 - Ermöglicht die Simulation mit eigener Eingabedatei
 - Pfadeingabe-Möglichkeiten:
-    * Datei im gleichen Ordner: Eingabe.txt
-    * Datei in Unterordner: Ordnername/Eingabe.txt
-    * Kompletter Pfad: C:/MeinOrdner/Eingabe.txt
+  * Datei im gleichen Ordner: Eingabe.txt
+  * Datei in Unterordner: Ordnername/Eingabe.txt
+  * Kompletter Pfad: C:/MeinOrdner/Eingabe.txt
 
 3.3 BEENDEN (Option 3)
 - Beendet das Programm
