@@ -5,6 +5,6 @@ Im Ordner "automatisierter Test" befindet sich
         - eigeneTestFälle mit selbst erstellte beispiele 
 	- eine Anleitung in der Datei "README.txt"
 
-Im Ordner "Quellcode" befinden sich die .cs Datein des Programms sowie eine .xml Datei mit der Dokumentationsausgabe.
+Im Ordner "Quellcode" befinden sich die .java Datein des Programms sowie eine .xml Datei mit der Dokumentationsausgabe.
 
-Die Datei "Abschlussprüfung_MATSE_2024_Dorsch.pdf" enthält die Schriftliche Ausarbeitung.
+Die Datei "Abschlussprüfung_MATSE_2025_Ajouka.pdf" enthält die Schriftliche Ausarbeitung.
