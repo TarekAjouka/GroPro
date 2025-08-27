@@ -22,6 +22,13 @@ public class Simulation {
         Set<Verbindung> verbindungen = first.getVerbindungen();
         List<Einfallpunkt> einfallpunkte = first.getEinfallpunkte();
 
+        List<Verbindung> sortierteVerbindungen = verbindungen.stream()
+                .sorted(java.util.Comparator
+                        .comparing((Verbindung v) -> v.getVon().getName())
+                        .thenComparing(v -> v.getNach().getName()))
+                .toList();
+
+
         // Liste für aktive Fahrzeuge
         // ID wird erstmal auf 0 gesetzt und erhöht sich jeweils um 1 bei jedem neuen Fahrzeug
         int nextId =0;
@@ -34,6 +41,9 @@ public class Simulation {
                 boolean ifZeitschritt = false;
                 if (i % zeitschritt == 0) {
                     ifZeitschritt = true;
+                    for (Verbindung v : verbindungen){
+                        v.neuerZeitschritt();
+                    }
                 }
 
                 // Fahrzeuge bewegen
@@ -75,7 +85,7 @@ public class Simulation {
 
         //Plan.txt erstellen
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(outPut+"Plan.txt"))) {
-            for (Verbindung v : verbindungen) {
+            for (Verbindung v : sortierteVerbindungen) {
                 Punkt von = v.getVon();
                 Punkt nach = v.getNach();
                 writer.write(von.getX() + " " + von.getY() + " " + nach.getX() + " " + nach.getY());
@@ -90,7 +100,7 @@ public class Simulation {
             // Erste Liste: Verbindungen mit Gesamtanzahl
             writer.write("Gesamtanzahl Fahrzeuge pro 100 m:");
             writer.newLine();
-            for (Verbindung v : verbindungen) {
+            for (Verbindung v : sortierteVerbindungen) {
                 writer.write(v.getVon().getName() + " -> " + v.getNach().getName() + ": " + v.getGesamt());
                 writer.newLine();
             }

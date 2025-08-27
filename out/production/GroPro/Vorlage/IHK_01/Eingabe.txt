@@ -1,6 +1,6 @@
 # Tunneldorf
 Zeitraum:
-100 1
+50 1
 
 Einfallspunkte:
 A 0 0 B 2
