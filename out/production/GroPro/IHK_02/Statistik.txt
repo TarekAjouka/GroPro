@@ -1,0 +1,14 @@
+Gesamtanzahl Fahrzeuge pro 100 m:
+A -> D: 36.0
+B -> D: 26.0
+C -> D: 16.0
+D -> A: 24.0
+D -> C: 8.0
+D -> B: 28.0
+Maximale Anzahl Fahrzeuge pro 100m:
+A -> D: 1.0
+B -> D: 1.0
+C -> D: 1.0
+D -> A: 3.0
+D -> C: 1.0
+D -> B: 2.0
